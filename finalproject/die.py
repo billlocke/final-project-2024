@@ -89,7 +89,7 @@ class Die():
             result = self.die.side.sample(weights=self.die.weights, replace=True).values[0]
             results.append(result)
         self.result = pd.DataFrame(results)
-        print ('results in roll_die:', self.result)
+        #print ('results in roll_die:', self.result)
         return (self.result)
         #return pd.Series(results)
         
