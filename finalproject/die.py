@@ -46,14 +46,14 @@ class Die():
         index_values = [self.faces]
         self.faces_df = pd.DataFrame({'weights': weights}, index=index_values)
 
-    def change_weight (self, face_to_change, new_weight=1):
+    def change_weight (self, face_to_change, new_weight):
         '''Takes two arguments: the face value to be changed and the new weight.'''
-        self.face_to_change = face_to_change
+#        self.face_to_change = face_to_change
 #        self.new_weight = new_weight
 
         # Checks to see if the face passed is valid value,
         #   i.e. if it is in the die array; IndexError if not
-        if self.face_to_change not in self.faces_df.index:
+        if face_to_change not in self.faces_df.index:
 #        if self.face_to_change not in self.faces_df.values:
             raise IndexError('face_to_change not in faces.df')
 
@@ -77,16 +77,16 @@ class Die():
         })
         return self.die
 
-    def roll_die (self, number_of_rolls = 1):
+    def roll_die (self, number_of_rolls):
         '''takes a parameter of how many times the die is to be rolled; defaults to 1.'''
-        self.number_of_rolls = number_of_rolls
+#        self.number_of_rolls = number_of_rolls
         # print (self.die, '\nsum of weights:', sum(self.die.weights))
         # print ('number of rolls:', self.number_of_rolls)   
 
         # This is essentially a random sample with replacement,
         #   from the private die data frame, that applies the weights.
         results = []
-        for i in range(self.number_of_rolls):
+        for i in range(number_of_rolls):
             result = self.die.side.sample(weights=self.die.weights, replace=True).values[0]
             results.append(result)
         self.result = pd.DataFrame(results)
