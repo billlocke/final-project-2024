@@ -68,7 +68,6 @@ class Die():
         
     def create_die (self, faces_df):
         '''Create the die using the object's weights. Save to self as a DataFrame.'''
-        self.faces_df = faces_df
         n_sides = len(self.faces_df.weights)
         my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
         self.die = pd.DataFrame({
@@ -90,7 +89,6 @@ class Die():
             result = self.die.side.sample(weights=self.die.weights, replace=True).values[0]
             results.append(result)
         self.result = pd.DataFrame(results)
-        #print ('results in roll_die:', self.result)
         return (self.result)
         #return pd.Series(results)
         
@@ -99,10 +97,30 @@ class Die():
         Returns a copy of the private die data frame.'''
         self.die = die
         die_deep = self.die.copy()
+#        die_deep
         return die_deep
         
     def plot_results(self, my_results):
         '''Show the results of rolling the dice n times with a simple bar graph.'''
         my_results.value_counts().sort_index().plot.bar(rot=0);
-        # A method to show the die’s current state.
         #  Returns a copy of the private die data frame.
+
+faces = np.arange (6)  # creates array
+faces_df = Die(faces)
+print ('initialized:')
+
+faces_df.change_weight (4, 5)
+print ('weight changed:')
+
+die = faces_df.create_die (faces_df)    # create die with updated weights
+print ('die created:')
+print ('this is the created die:\n', die)
+
+print ('show die state with method call:')
+die_deep2 = faces_df.show_die_state (die)
+print ('show die state2:\n', die_deep2)
+
+results = faces_df.roll_die(10)
+print ('rolled die:') 
+print ('results:', results)
+faces_df.plot_results (results)

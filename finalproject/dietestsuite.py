@@ -20,7 +20,6 @@ class DieTestSuite(unittest.TestCase):
         print ('entering test_2_create_die')
         # 
         '''Create the die using the object's weights. Save to self as a DataFrame.'''
-        '''Create the die using the object's weights. Save to self as a DataFrame.'''
         n_sides = len(self.faces_df.weights)
         my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
         self.die = pd.DataFrame({
