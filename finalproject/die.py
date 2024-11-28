@@ -46,10 +46,10 @@ class Die():
         index_values = [self.faces]
         self.faces_df = pd.DataFrame({'weights': self.weights}, index=index_values)
 
-    def change_weight (self, face_to_change, new_weight):
+    def change_weight (self, face_to_change, new_weight=1):
         '''Takes two arguments: the face value to be changed and the new weight.'''
         self.face_to_change = face_to_change
-        self.new_weight = new_weight
+#        self.new_weight = new_weight
 
         # Checks to see if the face passed is valid value,
         #   i.e. if it is in the die array; IndexError if not
@@ -59,12 +59,13 @@ class Die():
 
         # Checks to see if the weight is a valid type,
         #   i.e. if it is numeric (integer or float); TypeError if not
-        if not isinstance(self.new_weight, (int, float)):
+#        if not isinstance(self.new_weight, (int, float)):
+        if not isinstance(new_weight, (int, float)):
             raise TypeError('new_weight is not valid type')
            
         # change face's weight
         # subtract 1 to change correct face due to Python offset
-        self.faces_df.loc[face_to_change-1] = self.new_weight
+        self.faces_df.loc[face_to_change-1] = new_weight
         
     def create_die (self, faces_df):
         '''Create the die using the object's weights. Save to self as a DataFrame.'''
@@ -104,23 +105,3 @@ class Die():
         '''Show the results of rolling the dice n times with a simple bar graph.'''
         my_results.value_counts().sort_index().plot.bar(rot=0);
         #  Returns a copy of the private die data frame.
-
-faces = np.arange (6)  # creates array
-faces_df = Die(faces)
-print ('initialized:')
-
-faces_df.change_weight (4, 5)
-print ('weight changed:')
-
-die = faces_df.create_die (faces_df)    # create die with updated weights
-print ('die created:')
-print ('this is the created die:\n', die)
-
-print ('show die state with method call:')
-die_deep2 = faces_df.show_die_state (die)
-print ('show die state2:\n', die_deep2)
-
-results = faces_df.roll_die(10)
-print ('rolled die:') 
-print ('results:', results)
-faces_df.plot_results (results)
