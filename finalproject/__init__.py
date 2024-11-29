@@ -1,3 +1,2 @@
 
-print ('Welcome to DS5100 Final Project package')
-
+print ('Welcome to the DS5100 Final Project package')

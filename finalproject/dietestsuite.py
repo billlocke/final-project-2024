@@ -29,32 +29,30 @@ class DieTestSuite(unittest.TestCase):
         self.assertTrue(isinstance (self.die, pd.DataFrame))
 #        return self.die
 
-#    def test_3_roll_die(self):
-#        print ('entering test_3_roll_die')        
-#        # 
+    def test_3_roll_die(self):
+        print ('entering test_3_roll_die')        
+        # 
 #        self.number_of_rolls = number_of_rolls
-#        # print (self.die, '\nsum of weights:', sum(self.die.weights))
-#        # print ('number of rolls:', self.number_of_rolls)   ##
-#
-#        # This is essentially a random sample with replacement,
-#        #   from the private die data frame, that applies the weights.
-#        results = []
-#        for i in range(self.number_of_rolls):
-#            result = self.die.side.sample(weights=self.die.weights, replace=True).values[0]
-#            results.append(result)
-#        self.result = pd.DataFrame(results)
-#        self.assertTrue(self.number_of_rolls >= 0)
-#        return (self.result)
-#        #return pd.Series(results)
+        # print (self.die, '\nsum of weights:', sum(self.die.weights))
+        # print ('number of rolls:', self.number_of_rolls)   ##
 
-#    def test_4_show_die_state(self):
-#        print ('entering test_4_show_die_state')
-#
-#        self.die = die
-#        die_deep = self.die.copy()
-#        self.assertTrue(isinstance (die_deep, pd.DataFrame))
-#        return die_deep
-               
+        # This is essentially a random sample with replacement,
+        #   from the private die data frame, that applies the weights.
+        results = []
+        for i in range(self.number_of_rolls):
+            result = self.die.side.sample(weights=self.die.weights, replace=True).values[0]
+            results.append(result)
+        self.result = pd.DataFrame(results)
+        self.assertTrue(self.number_of_rolls >= 0)
+        return (self.result)
+        #return pd.Series(results)
+
+    def test_4_show_die_state(self):
+        print ('entering test_4_show_die_state')
+        self.die = die
+        die_deep = self.die.copy()
+        self.assertTrue(isinstance (die_deep, pd.DataFrame))
+        return die_deep
 
 faces = np.arange (6)  # creates array
 faces_df = Die(faces)
