@@ -38,7 +38,8 @@ class Die():
             # NOTE: faces = np.unique (faces) removes "redundant" values        
 
         # Internally initializes the weights to 1.0 for each face.
-        weights = np.ones(len(self.faces))
+        self.weights = np.ones(len(self.faces))
+#        weights = np.ones(len(self.faces))
         #print (faces, weights)
 
         # Saves both faces and weights in a private data frame
