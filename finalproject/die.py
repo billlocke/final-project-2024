@@ -110,3 +110,4 @@ class Die():
         print ('my_results dimensions:', my_results.shape)
         print ('WIDE dimentions:', WIDE.shape)
         print ('WIDE:', WIDE)
+#        #  Returns a copy of the private die data frame.
