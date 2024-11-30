@@ -45,7 +45,7 @@ class Die():
         # Saves both faces and weights in a private data frame
         #   with faces in the index.
         index_values = [self.faces]
-        self.faces_df = pd.DataFrame({'weights': weights}, index=index_values)
+        self.faces_df = pd.DataFrame({'weights': self.weights}, index=index_values)
 
     def change_weight (self, face_to_change, new_weight):
         '''Takes two arguments: the face value to be changed and the new weight.'''
