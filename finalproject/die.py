@@ -69,6 +69,7 @@ class Die():
         
     def create_die (self, faces_df):
         '''Create the die using the object's weights. Save to self as a DataFrame.'''
+        self.faces_df = faces_df
         n_sides = len(self.faces_df.weights)
         my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
         self.die = pd.DataFrame({
