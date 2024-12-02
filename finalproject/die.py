@@ -113,7 +113,7 @@ class Die():
         
     def plot_results(self, my_results):
         '''Show the results of rolling the dice n times with a simple bar graph.'''
-                my_results.value_counts().sort_index().plot.bar(rot=0);
+        my_results.value_counts().sort_index().plot.bar(rot=0);
         NARROW = pd.DataFrame(my_results).stack
         print ('NARROW:\n', NARROW)
         WIDE = pd.DataFrame(my_results).unstack()
