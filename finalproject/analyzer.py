@@ -73,3 +73,12 @@ class Analyzer():
         and a column for the associated counts.
         
         '''
+
+        '''my_results.value_counts().sort_index().plot.bar(rot=0);
+        NARROW = pd.DataFrame(my_results).stack
+        print ('NARROW:\n', NARROW)
+        WIDE = pd.DataFrame(my_results).unstack()
+        print ('my_results dimensions:', my_results.shape)
+        print ('WIDE dimensions:', WIDE.shape)
+        print ('WIDE:\n', WIDE)
+'''

@@ -50,7 +50,7 @@ class Die():
     def change_weight (self, face_to_change, new_weight):
         '''Takes two arguments: the face value to be changed and the new weight.'''
 #        self.face_to_change = face_to_change
-#        self.new_weight = new_weight
+        self.new_weight = new_weight
 
         # Checks to see if the face passed is valid value,
         #   i.e. if it is in the die array; IndexError if not
@@ -61,18 +61,26 @@ class Die():
         # Checks to see if the weight is a valid type,
         #   i.e. if it is numeric (integer or float); TypeError if not
 #        if not isinstance(self.new_weight, (int, float)):
-        if not isinstance(new_weight, (int, float)):
+        if not isinstance(self.new_weight, (int, float)):
             raise TypeError('new_weight is not valid type')
            
         # change face's weight
         # subtract 1 to change correct face due to Python offset
-        self.faces_df.loc[face_to_change-1] = new_weight
+        self.faces_df.loc[face_to_change-1] = self.new_weight
+        print ('self.new_weight in change_weight:', self.new_weight)
+        print ('self.faces in change_weight:', self.faces_df)
         
     def create_die (self, faces_df):
         '''Create the die using the object's weights. Save to self as a DataFrame.'''
-        self.faces_df = faces_df
+        print ('self.faces_df type in create_die:', type (self.faces_df))
+        print ('self.faces_df in create_die:', self.faces_df)
+#        self.faces_df = faces_df
         n_sides = len(self.faces_df.weights)
+        print ('n_sides in create_die:', n_sides)
         my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
+        print ('self.faces_df.weights in create_die:', self.faces_df.weights)
+        print ('my_probs in create_die:', my_probs)
+        print ('sum (self.faces_df.weights) in create_die', sum(self.faces_df.weights))
         self.die = pd.DataFrame({
         'side': range(1, n_sides + 1),
         'weights': my_probs
@@ -103,12 +111,13 @@ class Die():
 #        die_deep
         return die_deep
         
-     def plot_results(self, my_results):
+    def plot_results(self, my_results):
         '''Show the results of rolling the dice n times with a simple bar graph.'''
-        my_results.value_counts().sort_index().plot.bar(rot=0);
+                my_results.value_counts().sort_index().plot.bar(rot=0);
         NARROW = pd.DataFrame(my_results).stack
         print ('NARROW:\n', NARROW)
         WIDE = pd.DataFrame(my_results).unstack()
         print ('my_results dimensions:', my_results.shape)
         print ('WIDE dimensions:', WIDE.shape)
         print ('WIDE:\n', WIDE)
+    #        #  Returns a copy of the private die data frame.
