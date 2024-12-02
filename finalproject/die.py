@@ -103,13 +103,12 @@ class Die():
 #        die_deep
         return die_deep
         
-    def plot_results(self, my_results):
+     def plot_results(self, my_results):
         '''Show the results of rolling the dice n times with a simple bar graph.'''
         my_results.value_counts().sort_index().plot.bar(rot=0);
         NARROW = pd.DataFrame(my_results).stack
         print ('NARROW:\n', NARROW)
         WIDE = pd.DataFrame(my_results).unstack()
         print ('my_results dimensions:', my_results.shape)
-        print ('WIDE dimentions:', WIDE.shape)
-        print ('WIDE:', WIDE)
-#        #  Returns a copy of the private die data frame.
+        print ('WIDE dimensions:', WIDE.shape)
+        print ('WIDE:\n', WIDE)

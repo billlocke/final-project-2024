@@ -54,6 +54,26 @@ class DieTestSuite(unittest.TestCase):
         self.assertTrue(isinstance (die_deep, pd.DataFrame))
         return die_deep
 
+faces = np.arange (6)  # creates array
+faces_df = Die(faces)
+print ('initialized in test:')
+
+faces_df.change_weight (4, 5)
+print ('weight changed in test:')
+
+die = faces_df.create_die (faces_df)    # create die with updated weights
+print ('die created in test:')
+#print ('this is the created die:\n', die)
+
+#print ('show die state with method call:')
+die_deep2 = faces_df.show_die_state (die)
+print ('show die state2 in test:\n', die_deep2)
+
+results = faces_df.roll_die(10)
+print ('roil_die in test:')
+print ('results:', results)
+faces_df.plot_results (results)
+print ('plot_results in test:')
 
 if __name__ == '__main__':
     unittest.main(verbosity=3)
