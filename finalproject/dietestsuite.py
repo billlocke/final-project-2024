@@ -54,6 +54,5 @@ class DieTestSuite(unittest.TestCase):
         self.assertTrue(isinstance (die_deep, pd.DataFrame))
         return die_deep
 
-
 if __name__ == '__main__':
     unittest.main(verbosity=3)
