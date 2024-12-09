@@ -24,6 +24,7 @@ class DieTestSuite(unittest.TestCase):
         '''Create the die using the object's weights. Save to self as a DataFrame.'''
         faces = np.arange (6)  # creates array
         faces_df = Die(faces)
+        die = faces_df.create_die (faces_df)
         print ('initialized:')
 #        n_sides = 6         # hardcoded for test
 #        my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
@@ -31,7 +32,7 @@ class DieTestSuite(unittest.TestCase):
 #        'side': range(1, n_sides + 1),
 #        'weights': my_probs
 #        })
-        self.assertTrue(isinstance (self.die, pd.DataFrame))
+        self.assertTrue(isinstance (die, pd.DataFrame))
 #        return self.die
 
     def test_3_roll_die(self):
@@ -43,6 +44,7 @@ class DieTestSuite(unittest.TestCase):
 
         faces = np.arange (6)  # creates array
         faces_df = Die(faces)
+        die = faces_df.create_die (faces_df)
 #        n_sides = len(self.faces_df.weights)
 #        my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
 #        self.die = pd.DataFrame({
@@ -71,12 +73,7 @@ class DieTestSuite(unittest.TestCase):
         print ('entering test_4_show_die_state')
         faces = np.arange (6)  # creates array
         faces_df = Die(faces)
-        n_sides = len(self.faces_df.weights)
-        my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
-        self.die = pd.DataFrame({
-        'side': range(1, n_sides + 1),
-        'weights': my_probs
-        })
+        die = faces_df.create_die (faces_df)
 
         self.die = die
         die_deep = self.die.copy()
@@ -84,6 +81,6 @@ class DieTestSuite(unittest.TestCase):
         print ('show die state2::\n', die_deep2)
         self.assertTrue(isinstance (die_deep, pd.DataFrame))
         return die_deep
-    
+
 if __name__ == '__main__':
     unittest.main(verbosity=3)
