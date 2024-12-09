@@ -95,6 +95,53 @@ item should show their docstrings. All parameters (with data types and defaults)
 should be described. All return values should be described. Do not describe private
 methods and attributes.
 
+ Parameters and Return Values
+ 
+ The Die class          M) = method
+                        P) = parameter
+                        R) = rerturn
+    M) initializer      P) faces: NumPy array of faces weights, default = 1; numeric
+                        R) instantiated object
+    M) change_weight    P) face_to_change; numeric / alpha depending on die type
+                        P) new_weight; nume
+                        R) updated weights with changed face
+    M) create die       P) faces; array of faces weights
+                        R) self.die; die object with faces and normalized weights
+    M) roll_die         P) number_of_rolls; integer; default = 1
+                        R) self.result; DataFrame of rolls results; roll #, face
+    M) show_die_state   P) self.die; die object
+                        R) deep copy of die object
+    M) plot_results     P) self.result; DataFrame with roll results
+                        R) # of times each face was thrown
+                        R) plot of # of times each face was thrown
+
+ The Game class         M) = method
+                        P) = parameter
+                        R) = rerturn
+    M) initializer      P) dies to be played; list
+                        R) instantiated die objects
+    M) play             P) number_of_rolls; integer
+                        R) roll results for each die; dataframe
+    M) show_results     P) format; alpha ‘n’ or ‘w’ (default)
+                        R) DataFrame of rolls, count_per_face in specified format
+    M)show_game_results P) results DataFrame of results
+                        R) plot of results
+                        
+ The Analyzer class     M) = method
+                        P) = parameter
+                        R) = rerturn
+    M) initializer      P) die_list; list of die objects to analyze
+                        R) instantiated die objects
+    M) jackpot          P) number_of_rolls; integer <- TBR
+                        R) number_of_jackpots; integer
+    M) face_counts      P) format; alpha <- TBR
+                        R) # times each face thrown per roll <- DataFrame
+    M) combo            P) results DataFrame
+                        R) # of times each result combination was thrown
+    M) permutation      P) results DataFrame
+                        R) # of times each result permutation was thrown
+
+
 List of classes and methods - from class and method docstrings
 Help on class Die in module __main__:
 
