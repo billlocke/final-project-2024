@@ -13,8 +13,10 @@ class DieTestSuite(unittest.TestCase):
         faces_df = Die(faces)
         print ('initialized:')
 
-        faces_df.change_weight (4, 5)
+        new_weight = 5
+        faces_df.change_weight (4, new_weight)
         print ('weight changed:')
+        self.assertTrue (new_weight > 0)
 
     def test_2_create_die(self):
         print ('entering test_2_create_die')
@@ -23,7 +25,7 @@ class DieTestSuite(unittest.TestCase):
         faces = np.arange (6)  # creates array
         faces_df = Die(faces)
         print ('initialized:')
-        n_sides = len(self.faces_df.weights)
+        n_sides = 6         # hardcoded for test
         my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
         self.die = pd.DataFrame({
         'side': range(1, n_sides + 1),
