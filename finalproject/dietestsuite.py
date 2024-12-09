@@ -11,11 +11,11 @@ class DieTestSuite(unittest.TestCase):
  
         faces = np.arange (6)  # creates array
         faces_df = Die(faces)
-        print ('initialized:')
+#        print ('initialized:')
 
         new_weight = 5
         faces_df.change_weight (4, new_weight)
-        print ('weight changed:')
+#        print ('weight changed:')
         self.assertTrue (new_weight > 0)
 
     def test_2_create_die(self):
@@ -25,7 +25,7 @@ class DieTestSuite(unittest.TestCase):
         faces = np.arange (6)  # creates array
         faces_df = Die(faces)
         die = faces_df.create_die (faces_df)
-        print ('initialized:')
+#        print ('initialized:')
 #        n_sides = 6         # hardcoded for test
 #        my_probs = [i/sum(self.faces_df.weights) for i in self.faces_df.weights]
 #        self.die = pd.DataFrame({
@@ -53,10 +53,10 @@ class DieTestSuite(unittest.TestCase):
 #        })
 
         results = faces_df.roll_die(10)
-        print ('roil_die in test:')
+#        print ('roil_die in test:')
         print ('results:', results)
         faces_df.plot_results (results)
-        print ('plot_results in test:')
+#        print ('plot_results in test:')
         
         # This is essentially a random sample with replacement,
         #   from the private die data frame, that applies the weights.
@@ -78,7 +78,7 @@ class DieTestSuite(unittest.TestCase):
         self.die = die
         die_deep = self.die.copy()
         die_deep2 = faces_df.show_die_state (die)
-        print ('show die state2::\n', die_deep2)
+#        print ('show die state2::\n', die_deep2)
         self.assertTrue(isinstance (die_deep, pd.DataFrame))
         return die_deep
 
