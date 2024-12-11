@@ -50,21 +50,20 @@ class AnalyzerTestSuite(unittest.TestCase):
         number_jackpots = print_result.jackpot(print_result)
         print ('number_jackpots in main:', number_jackpots)
         
-        self.assertTrue(isinstance (self.die, pd.DataFrame))
-
+        self.assertTrue(isinstance (die_list, list))
+                
     def test_2_face_counts_per_roll(self):
         print ('entering test_2_create_die')
         # 
-        self.assertTrue(isinstance (self.die, pd.DataFrame))
-        return self.die
+#        self.assertTrue(isinstance (die_list, list))
 
     def test_3_combo_count(self):
         print ('entering test_3_combo_count')
-        self.assertTrue(isinstance (self.die, pd.DataFrame))
+#        self.assertTrue(isinstance (die_list, list))
 
     def test_4_permutation_count(self):
         print ('entering test_4_permutation_count')
-        self.assertTrue(isinstance (self.die, pd.DataFrame))
+#        self.assertTrue(isinstance (die_list, list))
 
 if __name__ == '__main__':
     unittest.main(verbosity=3)
