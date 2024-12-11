@@ -21,6 +21,7 @@ class Game():
         2. A play method
         3. Show results of the most recent play
     '''
+    
     def __init__(self, die_list):
         self.die_list = die_list
         ''' Takes a NumPy array of faces as an argument.'''
@@ -35,14 +36,48 @@ class Game():
             i.e. have the roll number as a named index, 
             columns for each die number 
             (using its list index as the column name),
-            and the face rolled in that instance in each cell.
-        '''
-#        self.number_of_rolls = number_of_rolls
+            and the face rolled in that instance in each cell.'''
+            
+        ### play PSEUDO CODE:
         
-        self.results1 = self.die_list.roll_die(number_of_rolls)
-        print ('rolled die:') 
-        print ('results:', self.results1)
+        # loop through items in list - for loop
+        # roll die for each of the die
 
+        loop_result_list = []    # contains each die's roll result
+        self.df_to_return = pd.DataFrame (index = range(len(self.die_list)))
+        self.df_to_return.index.name = 'Roll#'
+        
+        for i in range(len(self.die_list)):    # roll each die
+            loop_result = self.die_list[i].roll_die(number_of_rolls)
+#            print ('loop_result type:', type (loop_result))
+            
+#            df_to_return = loop_result
+            
+            self.df_to_return = pd.concat ([self.df_to_return, loop_result], axis=1,\
+                                          ignore_index=True)
+            print ('df_to_return:\n', self.df_to_return)
+            loop_result_list.append (loop_result)
+        
+#        results_df1 = pd.concat ([results2,results1], axis=1)
+
+#        print ('length of loop_result_list in play:', len(loop_result_list))
+#        print ('loop_result_list in play:\n', loop_result_list)
+
+        '''# NEW CODE
+        
+        print ('loop_result_list type:', type(loop_result_list))
+        df_to_return = pd.DataFrame (loop_result_list, columns=['Die', 'Roll', 'Face'])
+        print ('df_to_return type:', type(df_to_return))   
+        return df_to_return
+    
+        # END NEW CODE'''
+        
+#        self.results1 = self.die_list.roll_die(number_of_rolls)
+#        print ('rolled die:') 
+#        print ('results:', self.results1)
+#        print ('results_list in play:\n', loop_result_list)
+
+        ### END PSEUDO CODE
 
     def show_results (self, form = 'w'):
         '''
@@ -61,6 +96,8 @@ class Game():
             raise ValueError('form is not "w" or "n".')
         return
 
+        # stack loop_result_list
+    
         # verify faces is type (np.ndarray); TypeError if not
         if not isinstance (self.faces, np.ndarray):
             raise TypeError('faces is not an np array')
