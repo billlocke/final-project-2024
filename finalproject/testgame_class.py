@@ -39,7 +39,7 @@ class GameTestSuite(unittest.TestCase):
         #print ('play die 2:') 
         results2 = game_to_play.play(n_rolls)
                 
-        self.assertTrue(len(self.die_list) > 0)
+        self.assertTrue(len(die_list) > 0)
 
 
     def test_2_show_game_results(self):
@@ -54,6 +54,6 @@ class GameTestSuite(unittest.TestCase):
         })
         self.assertTrue(isinstance (self.die, pd.DataFrame))
         return self.die
-        
+            
 if __name__ == '__main__':
     unittest.main(verbosity=3)
