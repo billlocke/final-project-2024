@@ -38,48 +38,20 @@ class Game():
             (using its list index as the column name),
             and the face rolled in that instance in each cell.'''
             
-        ### play PSEUDO CODE:
-        
-        # loop through items in list - for loop
-        # roll die for each of the die
-
         loop_result_list = []    # contains each die's roll result
         self.df_to_return = pd.DataFrame (index = range(len(self.die_list)))
         self.df_to_return.index.name = 'Roll#'
         
         for i in range(len(self.die_list)):    # roll each die
-            loop_result = self.die_list[i].roll_die(number_of_rolls)
-#            print ('loop_result type:', type (loop_result))
-            
-#            df_to_return = loop_result
-            
+            loop_result = self.die_list[i].roll_die(number_of_rolls)            
             self.df_to_return = pd.concat ([self.df_to_return, loop_result], axis=1,\
                                           ignore_index=True)
             print ('df_to_return:\n', self.df_to_return)
             loop_result_list.append (loop_result)
         
-#        results_df1 = pd.concat ([results2,results1], axis=1)
-
-#        print ('length of loop_result_list in play:', len(loop_result_list))
-#        print ('loop_result_list in play:\n', loop_result_list)
-
-        '''# NEW CODE
-        
-        print ('loop_result_list type:', type(loop_result_list))
-        df_to_return = pd.DataFrame (loop_result_list, columns=['Die', 'Roll', 'Face'])
-        print ('df_to_return type:', type(df_to_return))   
-        return df_to_return
+        return self.df_to_return
     
-        # END NEW CODE'''
-        
-#        self.results1 = self.die_list.roll_die(number_of_rolls)
-#        print ('rolled die:') 
-#        print ('results:', self.results1)
-#        print ('results_list in play:\n', loop_result_list)
-
-        ### END PSEUDO CODE
-
-    def show_results (self, form = 'w'):
+    def show_results (self, results_df, form = 'w'):
         '''
         Takes parameter specifying wide or narrow format. 
         Returns a copy of the private play data frame
@@ -90,34 +62,8 @@ class Game():
             comprising the roll number and the dienumber (in that order), 
             and a single column with the outcomes (i.e. the face rolled).
         '''
-        
+
         self.form = form.lower()
-        if self.form != 'w' or self.form != 'n':
+        if self.form != 'w' and self.form != 'n':
             raise ValueError('form is not "w" or "n".')
-        return
-
-        # stack loop_result_list
-    
-        # verify faces is type (np.ndarray); TypeError if not
-        if not isinstance (self.faces, np.ndarray):
-            raise TypeError('faces is not an np array')
-
-        # Tests to see if the values are distinct; ValueError if not
-        if len(self.faces) != len(set(self.faces)):    # 'set' values are unique
-            raise ValueError('faces are not unique')
-            # NOTE: faces = np.unique (faces) removes "redundant" values        
-
-        # Internally initializes the weights to 1.0 for each face.
-        self.weights = np.ones(len(self.faces))
-        #print (faces, weights)
-
-        # Saves both faces and weights in a private data frame
-        #   with faces in the index.
-        index_values = [self.faces]
-        self.faces_df = pd.DataFrame({'weights': self.weights}, index=index_values)
-
-    def show_game_results(self, my_results):
-        '''Show the results of rolling the dice n times with a simple bar graph.'''
-        my_results.value_counts().sort_index().plot.bar(rot=0);
-        # A method to show the die’s current state.
-        #  Returns a copy of the private die data frame.
+        return results_df
