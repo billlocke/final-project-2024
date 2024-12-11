@@ -16,61 +16,26 @@ class Analyzer():
         4. Combo_count
         5. Permutation count
     '''
-    def __init__(self, die_list):
-        '''     
-        Takes a game object as its input parameter.
-        Throws a ValueError if the passed value is not a Game object
-        '''
-        self.die_list = die_list
+    def __init__(self, results2):
+        self.results2 = results2
         return
     
-    def jackpot (self, number_of_rolls):
+    def jackpot (self, df_to_check_jackpot):
         '''
         A jackpot is a result in which all faces are the same,
             e.g. all ones for a six-sided die.
         Computes how many times the game resulted in a jackpot.
-        Returns an integer for the number of jackpots. 
+        Returns an integer for the number of jackpots. '''
         
-        ### jackpot PSEUDO CODE:
-        
-        Input is DataFrame with roll # index, 
-            and column for each Die result (face):
-        
-                Die1 Die2 Die3
-        roll #
-            1     6    4    3
-            2     1    3    3
-            3     4    5    1
-            4     1    1    1
-            5     6    2    5
-            
-        jackpot_number = 0
-        For each roll n
-            if Die1 face == Die2 face == Die3 face
-                jackpot_number += 1
-        return jackpot_number
+        self.df_to_check_jackpot = self.results2
+        print ('df_to_check_jackpot type in jackpot:', type (df_to_check_jackpot))
 
-        loop_result_list = []    # contains each die's roll result
-        for i in range(len(self.die_list)):
-            loop_result = self.die_list[i].roll_die(number_of_rolls)
-            loop_result_list.append (loop_result)
-            
-        print ('length of loop_result_list:', len(loop_result_list))
-        print ('loop_result_list:', loop_result_list)
-            
-        self.results1 = self.die_list.roll_die(number_of_rolls)
-        print ('rolled die:') 
-        print ('results:', self.results1)
-
-        ### END jackpot PSEUDO CODE
-        '''
-        
-        self.number_of_rolls = number_of_rolls
-        
-        self.results1 = self.die_list.roll_die(self.number_of_rolls)
-        print ('rolled die:') 
-        print ('results:', self.results1)
-
+        a = self.df_to_check_jackpot.values
+        # boolean: 1 if all values in row match, otherwise 0
+        b = (a == a[:, [0]]).all(axis=1)      # THANK YOU INTERNET
+        # total the numnber of 1's (jackpot)
+        number_jackpots = sum (b)
+        return number_jackpots
 
     def face_counts_per_roll  (self, form = 'w'):
         '''
@@ -81,8 +46,10 @@ class Analyzer():
         Returns a data frame of results.
         The data frame has an index of the roll number,
             face values as columns, 
-            and count values in the cells (i.e. it is in wide format).   
+            and count values in the cells (i.e. it is in wide format).
+            '''
            
+        '''
         ### face_counts_per_roll PSEUDO CODE:
         
         Input is DataFrame with roll # index, 
@@ -186,7 +153,6 @@ class Analyzer():
         ### END combo_count PSEUDO CODE
         '''
 
-        
     def permutation_count (self, ):
         '''
         Computes the distinct permutations of faces rolled, a
