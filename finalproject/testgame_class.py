@@ -11,16 +11,33 @@ class GameTestSuite(unittest.TestCase):
         # 
         print ('entering test_1_play')        
  
-        loop_result_list = []    # contains each die's roll result
-        self.df_to_return = pd.DataFrame (index = range(len(self.die_list)))
-        self.df_to_return.index.name = 'Roll#'
-        
-        for i in range(len(self.die_list)):    # roll each die
-            loop_result = self.die_list[i].roll_die(number_of_rolls)
-            
-            self.df_to_return = pd.concat ([self.df_to_return, loop_result], axis=1,\
-                                          ignore_index=True)
-            loop_result_list.append (loop_result)
+        faces = np.arange (6)  # creates array
+        faces_df1 = Die(faces) # instantiate DIe objects
+        faces_df2 = Die(faces)
+        #print ('initialized:')
+
+        faces_df1.change_weight (4, 5)
+        #print ('weight changed:')
+
+        die1 = faces_df1.create_die (faces_df1)  # create die
+        die2 = faces_df2.create_die (faces_df2)
+        #print ('created die:')
+
+        print ('show die state 1:')
+        die_deep1 = faces_df1.show_die_state (die1)
+        #print (die_deep1)
+        #print ('show die state 2:')
+        die_deep2 = faces_df2.show_die_state (die2)
+        #print (die_deep2)
+
+        die_list = [faces_df1, faces_df2]
+        #print ('die_list:', die_list)
+
+        game_to_play = Game(die_list)     # instantiate Game
+        n_rolls = 10
+
+        #print ('play die 2:') 
+        results2 = game_to_play.play(n_rolls)
                 
         self.assertTrue(len(self.die_list) > 0)
 
@@ -37,6 +54,6 @@ class GameTestSuite(unittest.TestCase):
         })
         self.assertTrue(isinstance (self.die, pd.DataFrame))
         return self.die
-    
+        
 if __name__ == '__main__':
     unittest.main(verbosity=3)
